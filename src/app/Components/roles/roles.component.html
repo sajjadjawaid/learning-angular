@@ -1,0 +1,40 @@
+<!-- <p>roles works!</p>
+<p class="bg-blue-300">{{ frameWorkName }}</p>
+<p>{{ version }}</p>
+<p>{{ isActive }} + {{ date }}</p>
+<p>{{ selectedProvince }}</p>
+
+<div class="row">
+  <div class="col-3">
+    <input type="text" [value]="frameWorkName" />
+  </div>
+  <div class="col-3">
+    <input [type]="type" />
+  </div>
+  <div class="col-3">
+    <input type="text" [(ngModel)]="frameWorkName" />
+  </div>
+  <div class="col-3">
+    <select [(ngModel)]="selectedProvince">
+      <option>Punjab</option>
+      <option>Sindh</option>
+      <option>KPK</option>
+    </select>
+  </div>
+  <div class="col-3">
+    <button class="btn btn-success" (click)="showMeAlert()">show me</button>
+  </div>
+  <div class="col-3">
+    <button class="btn btn-success" (click)="showMeMessage('message function')">
+      show me message
+    </button>
+  </div>
+</div> -->
+
+<div class="row">
+  <div class="col-4">
+    <ul>
+      <li *ngFor="let item of roleList">{{ item.role }} {{ item.roleId }}</li>
+    </ul>
+  </div>
+</div>
