@@ -1,11 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { MasterService } from '../../Services/master.service';
 import { APIResponseModel, IDesignation } from '../../Model/Interface/role';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-designation',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './designation.component.html',
   styleUrl: './designation.component.css',
 })

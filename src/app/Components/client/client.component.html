@@ -1,59 +1,247 @@
-<div
-  class="max-w-sm mx-auto bg-white shadow-md rounded-lg overflow-hidden my-4"
->
-  <!-- Card Header -->
-  <div class="bg-gray-800 text-white text-center py-2">
-    <h2 class="text-xl font-bold">Card Title</h2>
-  </div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Client Information</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100 p-6">
+    <div class="container flex flex-wrap gap-6">
+      <!-- Client Information Table -->
+      <div class="flex-1 bg-white p-6 rounded-lg shadow-lg overflow-x-auto">
+        <app-alert></app-alert>
+        <h2 class="text-2xl font-bold mb-4 text-gray-800">
+          Client Information
+        </h2>
+        <table class="min-w-full divide-y divide-gray-200">
+          <!-- Table Header -->
+          <thead class="bg-blue-500 text-white">
+            <tr>
+              <th class="p-2 text-left text-sm font-medium">#</th>
+              <th class="p-2 text-left text-sm font-medium">Company Name</th>
+              <th class="p-2 text-left text-sm font-medium">
+                Contact Person Name
+              </th>
+              <th class="p-2 text-left text-sm font-medium">City</th>
+              <th class="p-2 text-left text-sm font-medium">Contact No</th>
+              <th class="p-2 text-left text-sm font-medium">Action</th>
+            </tr>
+          </thead>
+          <!-- Table Body -->
+          <tbody class="bg-white divide-y divide-gray-200">
+            <tr *ngFor="let item of clientList; let i = index">
+              <td class="p-2 text-sm">{{ i + 1 }}</td>
+              <td class="p-2 text-sm">{{ item.companyName | uppercase }}</td>
+              <td class="p-2 text-sm">{{ item.contactPersonName }}</td>
+              <td class="p-2 text-sm">{{ item.city }}</td>
+              <td class="p-2 text-sm">{{ item.contactNo }}</td>
+              <td class="p-2 text-sm">
+                <div class="flex space-x-2">
+                  <!-- Edit Button -->
+                  <button
+                    class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
+                    (click)="onEditClient(item)"
+                  >
+                    Edit
+                  </button>
+                  <!-- Delete Button -->
+                  <button
+                    class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400"
+                    (click)="onDeleteClient(item.clientId)"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-  <!-- Card Body with 8 Information Items -->
-  <div class="p-4">
-    <!-- Item 1 -->
-    <div class="flex justify-between border-b pb-2 mb-2">
-      <span class="font-semibold text-gray-700">Item 1</span>
-      <span class="text-gray-500">Value 1</span>
-    </div>
-    <!-- Item 2 -->
-    <div class="flex justify-between border-b pb-2 mb-2">
-      <span class="font-semibold text-gray-700">Item 2</span>
-      <span class="text-gray-500">Value 2</span>
-    </div>
-    <!-- Item 3 -->
-    <div class="flex justify-between border-b pb-2 mb-2">
-      <span class="font-semibold text-gray-700">Item 3</span>
-      <span class="text-gray-500">Value 3</span>
-    </div>
-    <!-- Item 4 -->
-    <div class="flex justify-between border-b pb-2 mb-2">
-      <span class="font-semibold text-gray-700">Item 4</span>
-      <span class="text-gray-500">Value 4</span>
-    </div>
-    <!-- Item 5 -->
-    <div class="flex justify-between border-b pb-2 mb-2">
-      <span class="font-semibold text-gray-700">Item 5</span>
-      <span class="text-gray-500">Value 5</span>
-    </div>
-    <!-- Item 6 -->
-    <div class="flex justify-between border-b pb-2 mb-2">
-      <span class="font-semibold text-gray-700">Item 6</span>
-      <span class="text-gray-500">Value 6</span>
-    </div>
-    <!-- Item 7 -->
-    <div class="flex justify-between border-b pb-2 mb-2">
-      <span class="font-semibold text-gray-700">Item 7</span>
-      <span class="text-gray-500">Value 7</span>
-    </div>
-    <!-- Item 8 -->
-    <div class="flex justify-between">
-      <span class="font-semibold text-gray-700">Item 8</span>
-      <span class="text-gray-500">Value 8</span>
-    </div>
-  </div>
+      <!-- Client Information Form -->
+      <div class="flex-1 bg-white p-6 rounded-lg shadow-lg">
+        <h2 class="text-2xl font-bold mb-4 text-gray-800">Client Form</h2>
+        <form>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Contact Person Name -->
+            <div class="mb-4">
+              <label
+                for="contactPersonName"
+                class="block text-sm font-medium text-gray-700 mb-1"
+                >Contact Person Name</label
+              >
+              <input
+                type="text"
+                [(ngModel)]="clientObj.contactPersonName"
+                name="contactPersonName"
+                id="contactPersonName"
+                class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+              />
+            </div>
+            <!-- Company Name -->
+            <div class="mb-4">
+              <label
+                for="companyName"
+                class="block text-sm font-medium text-gray-700 mb-1"
+                >Company Name</label
+              >
+              <input
+                type="text"
+                [(ngModel)]="clientObj.companyName"
+                name="companyName"
+                id="companyName"
+                class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+              />
+            </div>
+            <!-- Address -->
+            <div class="mb-4">
+              <label
+                for="address"
+                class="block text-sm font-medium text-gray-700 mb-1"
+                >Address</label
+              >
+              <input
+                type="text"
+                [(ngModel)]="clientObj.address"
+                name="address"
+                id="address"
+                class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+              />
+            </div>
+            <!-- City -->
+            <div class="mb-4">
+              <label
+                for="city"
+                class="block text-sm font-medium text-gray-700 mb-1"
+                >City</label
+              >
+              <input
+                type="text"
+                [(ngModel)]="clientObj.city"
+                name="city"
+                id="city"
+                class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+              />
+            </div>
+            <!-- Pincode -->
+            <div class="mb-4">
+              <label
+                for="pincode"
+                class="block text-sm font-medium text-gray-700 mb-1"
+                >Pincode</label
+              >
+              <input
+                type="text"
+                [(ngModel)]="clientObj.pincode"
+                name="pincode"
+                id="pincode"
+                class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+              />
+            </div>
+            <!-- State -->
+            <div class="mb-4">
+              <label
+                for="state"
+                class="block text-sm font-medium text-gray-700 mb-1"
+                >State</label
+              >
+              <input
+                type="text"
+                [(ngModel)]="clientObj.state"
+                name="state"
+                id="state"
+                class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+              />
+            </div>
+            <!-- Employee Strength -->
+            <div class="mb-4">
+              <label
+                for="employeeStrength"
+                class="block text-sm font-medium text-gray-700 mb-1"
+                >Employee Strength</label
+              >
+              <input
+                type="text"
+                [(ngModel)]="clientObj.employeeStrength"
+                name="employeeStrength"
+                id="employeeStrength"
+                class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+              />
+            </div>
+            <!-- Registration Number -->
+            <div class="mb-4">
+              <label
+                for="regNo"
+                class="block text-sm font-medium text-gray-700 mb-1"
+                >Registration Number</label
+              >
+              <input
+                type="text"
+                [(ngModel)]="clientObj.regNo"
+                name="regNo"
+                id="regNo"
+                class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+              />
+            </div>
+            <!-- GST Number -->
+            <div class="mb-4">
+              <label
+                for="gstNo"
+                class="block text-sm font-medium text-gray-700 mb-1"
+                >GST Number</label
+              >
+              <input
+                type="text"
+                [(ngModel)]="clientObj.gstNo"
+                name="gstNo"
+                id="gstNo"
+                class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+              />
+            </div>
+            <!-- Contact Number -->
+            <div class="mb-4">
+              <label
+                for="contactNo"
+                class="block text-sm font-medium text-gray-700 mb-1"
+                >Contact Number</label
+              >
+              <input
+                type="text"
+                [(ngModel)]="clientObj.contactNo"
+                name="contactNo"
+                id="contactNo"
+                class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+              />
+            </div>
+          </div>
+          <!-- Submit Button  -->
+          <button
+            type="submit"
+            class="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            (click)="onSaveClient()"
+          >
+            {{ clientObj.clientId != 0 ? "Update Client" : "Save Client" }}
+          </button>
 
-  <!-- Card Footer (optional) -->
-  <div class="bg-gray-100 text-center py-2">
-    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-      Action
-    </button>
-  </div>
-</div>
+          <!-- <app-my-button
+            type="submit"
+            class="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            [btnText]="
+              clientObj.clientId != 0 ? 'Update Client' : 'Save Client'
+            "
+          ></app-my-button> -->
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

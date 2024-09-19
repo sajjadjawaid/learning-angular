@@ -11,7 +11,7 @@
   </head>
   <body>
     <!-- Navbar -->
-    <!-- <nav class="bg-gray-800 text-white">
+    <nav class="bg-gray-800 text-white">
       <div
         class="container mx-auto px-4 py-2 flex items-center justify-between"
       >
@@ -59,15 +59,24 @@
             >Client</a
           >
           <a
-          routerLink="/client-project"
-          routerLinkActive="active"
-          class="block px-4 py-2 text-sm font-medium hover:bg-gray-600"
-          >Client Project</a
-        >
+            routerLink="/client-project"
+            routerLinkActive="active"
+            class="block px-4 py-2 text-sm font-medium hover:bg-gray-600"
+            >Client Project</a
+          >
         </div>
-      </div> -->
-    <!-- Mobile Menu -->
-    <!-- <div id="menu" class="lg:hidden hidden bg-gray-700 text-white">
+        <form>
+          <button
+            type="submit"
+            (click)="onLogOut()"
+            class="px-4 py-2 bg-red-500 text-white font-semibold rounded-lg shadow-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
+          >
+            Log Out
+          </button>
+        </form>
+      </div>
+      <!-- Mobile Menu -->
+      <div id="menu" class="lg:hidden hidden bg-gray-700 text-white">
         <a
           routerLink="/master"
           routerLinkActive="active"
@@ -93,7 +102,7 @@
           >Client Project</a
         >
       </div>
-    </nav> -->
+    </nav>
 
     <!-- Router Outlet -->
     <router-outlet></router-outlet>

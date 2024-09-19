@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Client Information</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100 p-6">
+    <div class="container flex flex-wrap gap-6">
+      <!-- Client Information Table -->
+
+      <div class="flex-1 bg-white p-6 rounded-lg shadow-lg overflow-x-auto">
+        <app-alert
+          [alertType]="'Employee Information Successfull '"
+        ></app-alert>
+        <h2 class="text-2xl font-bold mb-4 text-gray-800">
+          Employee Information
+        </h2>
+        <table class="min-w-full divide-y divide-gray-200">
+          <!-- Table Header -->
+          <thead class="bg-blue-500 text-white">
+            <tr>
+              <th class="p-3 text-left text-sm font-medium">#</th>
+              <th class="p-3 text-left text-sm font-medium">Company Name</th>
+              <th class="p-3 text-left text-sm font-medium">Project Name</th>
+              <th class="p-3 text-left text-sm font-medium">Emp Name</th>
+              <th class="p-3 text-left text-sm font-medium">Start Date</th>
+              <th class="p-3 text-left text-sm font-medium">Action</th>
+            </tr>
+          </thead>
+          <!-- Table Body -->
+          <tbody class="bg-white divide-y divide-gray-200">
+            <!-- Table rows will be added dynamically -->
+            <tr *ngFor="let item of projectList(); let i = index">
+              <td class="p-2 text-sm">{{ i + 1 }}</td>
+              <td class="p-2 text-sm">{{ item.clientName | uppercase }}</td>
+              <td class="p-2 text-sm">{{ item.projectName }}</td>
+              <td class="p-2 text-sm">{{ item.empName }}</td>
+              <td class="p-2 text-sm">
+                {{ item.startDate | date : "dd-MM-yy" }}
+              </td>
+              <td class="p-2 text-sm">
+                <div class="flex space-x-2">
+                  <!-- Edit Button -->
+                  <button
+                    class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
+                  >
+                    Edit
+                  </button>
+                  <!-- Delete Button -->
+                  <button
+                    class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Client Information Form -->
+      <div class="flex-1 bg-white p-6 rounded-lg shadow-lg">
+        <h2 class="text-2xl font-bold mb-4 text-gray-800">Project Form</h2>
+        <form [formGroup]="projectForm">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="mb-4">
+              <label
+                for="input1"
+                class="block text-sm font-medium text-gray-700 mb-1"
+                >Project Name</label
+              >
+              <input
+                type="text"
+                id="input1"
+                formControlName="projectName"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+              />
+            </div>
+
+            <div class="mb-4">
+              <label
+                for="input2"
+                class="block text-sm font-medium text-gray-700 mb-1"
+                >Start Date</label
+              >
+              <input
+                type="date"
+                id="input2"
+                formControlName="startDate"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+              />
+            </div>
+
+            <div class="mb-4">
+              <label
+                for="input3"
+                class="block text-sm font-medium text-gray-700 mb-1"
+                >Expected End Date</label
+              >
+              <input
+                type="date"
+                id="input3"
+                formControlName="expectedEndDate"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+              />
+            </div>
+
+            <div class="mb-4">
+              <label
+                for="input4"
+                class="block text-sm font-medium text-gray-700 mb-1"
+                >Contact Name</label
+              >
+              <input
+                type="text"
+                id="input4"
+                formControlName="contactPerson"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+              />
+            </div>
+
+            <div class="mb-4">
+              <label
+                for="input5"
+                class="block text-sm font-medium text-gray-700 mb-1"
+                >Contact Mobile</label
+              >
+              <input
+                type="text"
+                id="input5"
+                formControlName="contactPersonContactNo"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+              />
+            </div>
+
+            <div class="mb-4">
+              <label
+                for="input6"
+                class="block text-sm font-medium text-gray-700 mb-1"
+                >Contact Email</label
+              >
+              <input
+                type="text"
+                id="input6"
+                formControlName="contactPersonEmailId"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+              />
+            </div>
+
+            <div class="mb-4">
+              <label
+                for="input7"
+                class="block text-sm font-medium text-gray-700 mb-1"
+                >Total Employee Count</label
+              >
+              <input
+                type="text"
+                id="input7"
+                formControlName="totalEmpWorking"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+              />
+            </div>
+
+            <div class="mb-4">
+              <label
+                for="input8"
+                class="block text-sm font-medium text-gray-700 mb-1"
+                >Project Costing</label
+              >
+              <input
+                type="text"
+                id="input8"
+                formControlName="projectCost"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+              />
+            </div>
+
+            <div class="mb-4 col-span-2">
+              <label
+                for="input9"
+                class="block text-sm font-medium text-gray-700 mb-1"
+                >Project Description</label
+              >
+              <textarea
+                id="input9"
+                rows="6"
+                formControlName="projectDetails"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+              ></textarea>
+            </div>
+
+            <div class="mb-4">
+              <label
+                for="input10"
+                class="block text-sm font-medium text-gray-700 mb-1"
+                >Select Client</label
+              >
+              <select
+                formControlName="clientId"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+              >
+                @for(item of clientList; track $index){
+                <option [value]="item.clientId">{{ item.companyName }}</option>
+                }
+              </select>
+            </div>
+
+            <div class="mb-4">
+              <label
+                for="input11"
+                class="block text-sm font-medium text-gray-700 mb-1"
+                >Lead By</label
+              >
+              <select
+                formControlName="leadByEmpId"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+              >
+                @for(item of employeeList; track $index){
+                <option [value]="item.empId">
+                  {{ item.empName }} - {{ item.empCode }}
+                </option>
+                }
+              </select>
+            </div>
+
+            <div formArrayName="location" class="space-y-6 col-span-2">
+              <div
+                *ngFor="let child of locations.controls; let i = index"
+                [formGroupName]="i"
+                class="bg-white shadow-lg rounded-lg p-6 flex flex-col gap-4 border border-gray-200"
+              >
+                <div class="flex flex-col gap-3">
+                  <label class="text-sm font-semibold text-gray-800"
+                    >Country</label
+                  >
+                  <input
+                    formControlName="country"
+                    class="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+                  />
+                </div>
+                <div class="flex flex-col gap-3">
+                  <label class="text-sm font-semibold text-gray-800"
+                    >City</label
+                  >
+                  <input
+                    formControlName="city"
+                    class="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+                  />
+                </div>
+                <button
+                  (click)="removeLocation(i)"
+                  class="bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 transition-all duration-300"
+                >
+                  Remove
+                </button>
+              </div>
+              <div class="flex justify-center">
+                <button
+                  (click)="addLocation()"
+                  class="bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+                >
+                  Add Location
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            class="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 mt-6"
+            (click)="onSaveProject()"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
