@@ -6,6 +6,7 @@ import { ClientProjectComponent } from './Components/client-project/client-proje
 import { LoginComponent } from './Components/login/login.component';
 import { LayoutComponent } from './Components/layout/layout.component';
 import { authGuard } from './Services/auth.guard';
+import { NotFoundComponent } from './Components/not-found/not-found.component';
 
 export const routes: Routes = [
   {
@@ -39,5 +40,9 @@ export const routes: Routes = [
         component: ClientProjectComponent,
       },
     ],
+  },
+  {
+    path: '**',
+    component: NotFoundComponent,
   },
 ];

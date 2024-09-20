@@ -1,0 +1,57 @@
+<div
+  class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50"
+  *ngIf="client"
+>
+  <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-2xl">
+    <h2 class="text-2xl font-bold mb-4">Client Details</h2>
+    <button
+      (click)="client = null"
+      class="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+    >
+      <svg
+        class="w-6 h-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M6 18L18 6M6 6l12 12"
+        ></path>
+      </svg>
+    </button>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div><strong>Company Name:</strong> {{ client.companyName }}</div>
+      <div>
+        <strong>Contact Person Name:</strong> {{ client.contactPersonName }}
+      </div>
+      <div><strong>Address:</strong> {{ client.address }}</div>
+      <div><strong>City:</strong> {{ client.city }}</div>
+      <div><strong>Pincode:</strong> {{ client.pincode }}</div>
+      <div><strong>State:</strong> {{ client.state }}</div>
+      <div>
+        <strong>Employee Strength:</strong> {{ client.employeeStrength }}
+      </div>
+      <div><strong>Registration Number:</strong> {{ client.regNo }}</div>
+      <div><strong>GST Number:</strong> {{ client.gstNo }}</div>
+      <div><strong>Contact Number:</strong> {{ client.contactNo }}</div>
+      <div *ngIf="client.imagePath">
+        <strong>Client Image:</strong>
+        <img
+          [src]="client.imagePath"
+          alt="Client Image"
+          class="w-32 h-32 object-cover mt-2"
+        />
+      </div>
+    </div>
+    <button
+      (click)="client = null"
+      class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
+    >
+      Close
+    </button>
+  </div>
+</div>

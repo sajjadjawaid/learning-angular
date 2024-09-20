@@ -10,6 +10,7 @@ export class Client {
   gstNo: string;
   contactNo: string;
   regNo: string;
+  imagePath?: string;
 
   constructor() {
     this.clientId = 0;
@@ -23,5 +24,6 @@ export class Client {
     this.gstNo = '';
     this.contactNo = '';
     this.regNo = '';
+    this.imagePath = '';
   }
 }
